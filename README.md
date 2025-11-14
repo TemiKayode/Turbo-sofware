@@ -48,7 +48,7 @@ A comprehensive full-stack SaaS application built with React, TypeScript, Supaba
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/TemiKayode/Turbo-sofware.git
+git clone https://github.com/TemiKayode/Turbo-sofware.git
 cd turbo-software
 ```
 
