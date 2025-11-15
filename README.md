@@ -5,6 +5,8 @@ A comprehensive full-stack SaaS application built with React, TypeScript, Supaba
 ## Tech Stack
 
 ### Frontend
+<img width="1897" height="884" alt="image" src="https://github.com/user-attachments/assets/2d579fe1-65e9-46b1-a114-16936c49f404" />
+
 - **React 18** - UI library
 - **TypeScript** - Type safety
 - **Vite** - Build tool
