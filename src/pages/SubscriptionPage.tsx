@@ -206,6 +206,10 @@ export function SubscriptionPage() {
     )
   }
 
+  if (!company) {
+    return null
+  }
+
   const currentTier = PRICING_TIERS.find(t => t.id === company.subscription_tier)
 
   return (

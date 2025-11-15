@@ -57,7 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         // If user record doesn't exist, try to create it
-        if (error.code === 'PGRST116') {
+        if ((error as any).code === 'PGRST116') {
           console.log('User record not found - attempting to create it')
           try {
             // Get user email from auth

@@ -13,6 +13,7 @@ import { Download } from 'lucide-react'
 import { exportTableToCSV } from '@/lib/exportUtils'
 
 interface TrialBalanceRow {
+  id?: string
   account_code: string
   account_name: string
   debit_balance: number
@@ -79,6 +80,7 @@ export function TrialBalancePage() {
         const netCredit = Math.max(0, balance.credit - balance.debit)
 
         return {
+          id: account.id,
           account_code: account.account_code,
           account_name: account.account_name,
           debit_balance: netDebit,

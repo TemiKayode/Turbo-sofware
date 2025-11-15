@@ -1,11 +1,13 @@
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
-let fpPromise: Promise<FingerprintJS.Agent> | null = null
+type Agent = Awaited<ReturnType<typeof FingerprintJS.load>>
+
+let fpPromise: Promise<Agent> | null = null
 
 /**
  * Initialize FingerprintJS for security tracking
  */
-export async function initFingerprint(): Promise<FingerprintJS.Agent | null> {
+export async function initFingerprint(): Promise<Agent | null> {
   if (!fpPromise) {
     const apiKey = import.meta.env.VITE_FINGERPRINTJS_API_KEY
     if (!apiKey) {
@@ -13,7 +15,7 @@ export async function initFingerprint(): Promise<FingerprintJS.Agent | null> {
       return null
     }
     try {
-      fpPromise = FingerprintJS.load({ apiKey })
+      fpPromise = FingerprintJS.load({ apiKey } as any)
     } catch (error) {
       console.error('Failed to load FingerprintJS:', error)
       return null

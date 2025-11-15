@@ -13,21 +13,25 @@ import { clsx } from 'clsx'
 
 interface Column<T> {
   header: string
-  accessor: keyof T | ((row: T) => React.ReactNode)
+  accessor?: keyof T | ((row: T) => React.ReactNode)
+  accessorKey?: keyof T | string
+  id?: string
+  cell?: (row: T) => React.ReactNode
   className?: string
 }
 
 interface DataTableProps<T> {
   data: T[]
-  columns: Column<T>[]
+  columns: any[]
   searchable?: boolean
   searchPlaceholder?: string
   onRowClick?: (row: T) => void
   actions?: (row: T) => React.ReactNode
   loading?: boolean
+  isLoading?: boolean
 }
 
-export function DataTable<T extends { id: string }>({
+export function DataTable<T extends { id?: string }>({
   data,
   columns,
   searchable = false,
@@ -35,22 +39,27 @@ export function DataTable<T extends { id: string }>({
   onRowClick,
   actions,
   loading = false,
+  isLoading,
 }: DataTableProps<T>) {
   const [searchTerm, setSearchTerm] = useState('')
+  const isActuallyLoading = loading || isLoading
 
   const filteredData = searchable
     ? data.filter((row) =>
         columns.some((col) => {
+          const accessor = col.accessor || col.accessorKey
           const value =
-            typeof col.accessor === 'function'
-              ? col.accessor(row)
-              : row[col.accessor]
+            typeof accessor === 'function'
+              ? accessor(row)
+              : accessor && typeof accessor === 'string' && accessor in row
+              ? (row as any)[accessor]
+              : ''
           return String(value || '').toLowerCase().includes(searchTerm.toLowerCase())
         })
       )
     : data
 
-  if (loading) {
+  if (isActuallyLoading) {
     return (
       <div className="flex items-center justify-center p-8">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
@@ -91,19 +100,27 @@ export function DataTable<T extends { id: string }>({
                 </TableCell>
               </TableRow>
             ) : (
-              filteredData.map((row) => (
+              filteredData.map((row, rowIdx) => (
                 <TableRow
-                  key={row.id}
+                  key={row.id || rowIdx}
                   className={clsx(onRowClick && 'cursor-pointer')}
                   onClick={() => onRowClick?.(row)}
                 >
-                  {columns.map((col, idx) => (
-                    <TableCell key={idx} className={col.className}>
-                      {typeof col.accessor === 'function'
-                        ? col.accessor(row)
-                        : String(row[col.accessor] || '')}
-                    </TableCell>
-                  ))}
+                  {columns.map((col, idx) => {
+                    const accessor = col.accessor || col.accessorKey
+                    const cellValue = col.cell 
+                      ? col.cell(row)
+                      : typeof accessor === 'function'
+                      ? accessor(row)
+                      : accessor && typeof accessor === 'string' && accessor in row
+                      ? String((row as any)[accessor] || '')
+                      : ''
+                    return (
+                      <TableCell key={col.id || idx} className={col.className}>
+                        {cellValue}
+                      </TableCell>
+                    )
+                  })}
                   {actions && (
                     <TableCell onClick={(e) => e.stopPropagation()}>
                       {actions(row)}
