@@ -1,6 +1,26 @@
+export function Spinner({ size = 'md', className = '' }: { size?: 'sm' | 'md' | 'lg'; className?: string }) {
+  const sizeClasses = {
+    sm: 'h-4 w-4',
+    md: 'h-8 w-8',
+    lg: 'h-12 w-12',
+  }
+  
+  return (
+    <div className={`inline-block ${className}`}>
+      <div
+        className={`${sizeClasses[size]} animate-spin rounded-full border-2 border-gray-300 border-t-[#2CA01C]`}
+        role="status"
+        aria-label="Loading"
+      >
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  )
+}
+
 export function LoadingSkeleton() {
   return (
-    <div className="space-y-6 animate-pulse">
+    <div className="space-y-6 animate-pulse" role="status" aria-label="Loading content">
       <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[1, 2, 3, 4].map((i) => (

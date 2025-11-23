@@ -61,11 +61,14 @@ export function LoginPage() {
         </div>
 
         {/* Login Method Toggle */}
-        <div className="flex border-b border-gray-200 mb-6">
+        <div className="flex border-b border-gray-200 mb-6" role="tablist" aria-label="Login method">
           <button
             type="button"
+            role="tab"
+            aria-selected={loginMethod === 'email'}
+            aria-controls="email-tabpanel"
             onClick={() => setLoginMethod('email')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:ring-offset-2 ${
               loginMethod === 'email'
                 ? 'border-[#2CA01C] text-gray-900'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -75,8 +78,11 @@ export function LoginPage() {
           </button>
           <button
             type="button"
+            role="tab"
+            aria-selected={loginMethod === 'phone'}
+            aria-controls="phone-tabpanel"
             onClick={() => setLoginMethod('phone')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#2CA01C] focus:ring-offset-2 ${
               loginMethod === 'phone'
                 ? 'border-[#2CA01C] text-gray-900'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -87,8 +93,8 @@ export function LoginPage() {
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+          <div role="tabpanel" id={loginMethod === 'email' ? 'email-tabpanel' : 'phone-tabpanel'}>
             {loginMethod === 'email' ? (
               <Input
                 type="email"
@@ -97,6 +103,9 @@ export function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={loading}
+                autoComplete="username"
+                aria-label="Email or user ID"
+                aria-required="true"
                 className="border-[#2CA01C] focus:border-[#2CA01C] focus:ring-[#2CA01C]"
               />
             ) : (
@@ -107,6 +116,9 @@ export function LoginPage() {
                 onChange={(e) => setPhone(e.target.value)}
                 required
                 disabled={loading}
+                autoComplete="tel"
+                aria-label="Phone number"
+                aria-required="true"
                 className="border-[#2CA01C] focus:border-[#2CA01C] focus:ring-[#2CA01C]"
               />
             )}
@@ -120,6 +132,10 @@ export function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               disabled={loading}
+              autoComplete="current-password"
+              aria-label="Password"
+              aria-required="true"
+              minLength={6}
               className="border-[#2CA01C] focus:border-[#2CA01C] focus:ring-[#2CA01C]"
             />
           </div>
@@ -141,10 +157,11 @@ export function LoginPage() {
           {/* Sign In Button */}
           <Button
             type="submit"
-            disabled={loading}
-            className="w-full bg-[#2CA01C] hover:bg-[#1e7a0f] text-white font-semibold py-3 flex items-center justify-center space-x-2 shadow-sm"
+            disabled={loading || (!email && !phone) || !password}
+            aria-busy={loading}
+            className="w-full bg-[#2CA01C] hover:bg-[#1e7a0f] text-white font-semibold py-3 flex items-center justify-center space-x-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Lock className="w-4 h-4" />
+            <Lock className="w-4 h-4" aria-hidden="true" />
             <span>{loading ? 'Signing in...' : 'Sign in'}</span>
           </Button>
 

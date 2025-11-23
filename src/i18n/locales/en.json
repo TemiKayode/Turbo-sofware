@@ -1,0 +1,56 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "actions": "Actions"
+  },
+  "auth": {
+    "login": "Sign in",
+    "logout": "Sign out",
+    "register": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "signInSuccess": "Successfully signed in",
+    "signInError": "Failed to sign in"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "overview": "Overview",
+    "recentActivity": "Recent Activity"
+  },
+  "companies": {
+    "title": "Companies",
+    "create": "Create Company",
+    "name": "Company Name",
+    "subscription": "Subscription"
+  },
+  "users": {
+    "title": "Users",
+    "create": "Create User",
+    "email": "Email",
+    "role": "Role"
+  },
+  "documents": {
+    "title": "Documents",
+    "upload": "Upload Document",
+    "name": "Document Name"
+  },
+  "subscription": {
+    "title": "Subscription",
+    "currentPlan": "Current Plan",
+    "upgrade": "Upgrade",
+    "downgrade": "Downgrade"
+  }
+}
+

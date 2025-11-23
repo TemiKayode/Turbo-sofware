@@ -1,0 +1,56 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "actions": "Acciones"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "register": "Crear cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "rememberMe": "Recordarme",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signInSuccess": "Sesión iniciada correctamente",
+    "signInError": "Error al iniciar sesión"
+  },
+  "dashboard": {
+    "title": "Panel de control",
+    "welcome": "Bienvenido de nuevo",
+    "overview": "Resumen",
+    "recentActivity": "Actividad reciente"
+  },
+  "companies": {
+    "title": "Empresas",
+    "create": "Crear Empresa",
+    "name": "Nombre de la Empresa",
+    "subscription": "Suscripción"
+  },
+  "users": {
+    "title": "Usuarios",
+    "create": "Crear Usuario",
+    "email": "Correo electrónico",
+    "role": "Rol"
+  },
+  "documents": {
+    "title": "Documentos",
+    "upload": "Subir Documento",
+    "name": "Nombre del Documento"
+  },
+  "subscription": {
+    "title": "Suscripción",
+    "currentPlan": "Plan Actual",
+    "upgrade": "Mejorar",
+    "downgrade": "Degradar"
+  }
+}
+

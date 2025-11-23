@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
-import { Search, ChevronRight, User, Moon, Sun, HelpCircle, LogOut } from 'lucide-react'
+import { Search, ChevronRight, User, HelpCircle, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -10,7 +10,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { ThemeToggle } from '@/components/ThemeToggle'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 const breadcrumbMap: Record<string, string> = {
   '/dashboard': 'Dashboard',
@@ -28,28 +30,6 @@ export function Header() {
   const navigate = useNavigate()
   const { user, signOut } = useAuth()
   const [searchQuery, setSearchQuery] = useState('')
-  const [darkMode, setDarkMode] = useState(false)
-
-  useEffect(() => {
-    // Check for saved theme preference
-    const isDark = localStorage.getItem('theme') === 'dark'
-    setDarkMode(isDark)
-    if (isDark) {
-      document.documentElement.classList.add('dark')
-    }
-  }, [])
-
-  const toggleDarkMode = () => {
-    const newMode = !darkMode
-    setDarkMode(newMode)
-    if (newMode) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
-  }
 
   const getBreadcrumbs = () => {
     const pathnames = location.pathname.split('/').filter((x) => x)
@@ -117,6 +97,12 @@ export function Header() {
           />
         </div>
 
+        {/* Theme Toggle */}
+        <ThemeToggle />
+
+        {/* Language Switcher */}
+        <LanguageSwitcher />
+
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -139,19 +125,6 @@ export function Header() {
             <DropdownMenuItem onClick={() => navigate('/settings')}>
               <User className="w-4 h-4 mr-2" />
               Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={toggleDarkMode}>
-              {darkMode ? (
-                <>
-                  <Sun className="w-4 h-4 mr-2" />
-                  Light Mode
-                </>
-              ) : (
-                <>
-                  <Moon className="w-4 h-4 mr-2" />
-                  Dark Mode
-                </>
-              )}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => navigate('/help')}>
               <HelpCircle className="w-4 h-4 mr-2" />

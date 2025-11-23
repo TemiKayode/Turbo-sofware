@@ -12,6 +12,8 @@ interface ImportMetaEnv {
   readonly VITE_STRIPE_PRICE_ENTERPRISE_YEARLY: string
   readonly VITE_ENCRYPTION_KEY: string
   readonly VITE_FINGERPRINTJS_API_KEY: string
+  readonly VITE_SENTRY_DSN?: string
+  readonly VITE_SENTRY_DEBUG?: string
 }
 
 interface ImportMeta {
